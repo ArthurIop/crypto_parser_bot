@@ -2,7 +2,7 @@ import random
 import telebot
 import crypto_parser_bot
 
-token = '1437801621:AAGqirw-CHQ9ecKw2T17pn1QWEj7ANvXrEM'
+token = 'ТОКЕН'
 bot = telebot.TeleBot(token)
 
 
