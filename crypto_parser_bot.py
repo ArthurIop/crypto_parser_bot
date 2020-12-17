@@ -56,10 +56,14 @@ def get_content (html, name):
             crypto.update({coin_name:listing[default
             ]})
             default+=1
+    keys_of_dict = crypto.keys()
+    for i in keys_of_dict:
+        if i ==name:
+            coin_dict = dict(crypto[name])
+            out = decorator(coin_dict)
+            return out
+    return 'Вы ввели неправильное значение, введите /help для подробной информации'
 
-    coin_dict = dict(crypto[name])
-    out = decorator(coin_dict)
-    return out
 
 
 
