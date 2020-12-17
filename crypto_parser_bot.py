@@ -58,23 +58,24 @@ def get_content (html, name):
             default+=1
 
     coin_dict = dict(crypto[name])
-    decorator(coin_dict)
+    out = decorator(coin_dict)
+    return out
+
 
 
 def decorator(coin_dict):
 
-    output =('Название криптовалюты: '+ coin_dict['coin_name']+'\n'+ 'Короткое название: '+ coin_dict['short_coin_name'] +'\n'+
+    output =str('Название криптовалюты: '+ coin_dict['coin_name']+'\n'+ 'Короткое название: '+ coin_dict['short_coin_name'] +'\n'+
           'Курс: ' + coin_dict['currency_rate']+ '\n' + 'Изменения за последний час: ' + coin_dict['change_percent_1h']+ '\n' +
           'Изменения за последние 24 часа: ' + coin_dict['change_percent_24h']+ '\n' + 'Изменения за неделю: ' + coin_dict['change_percent_7d']+ '\n' +
           'Рыночная капитализация: '  + coin_dict['market_capitalization'])
+    return output
 
-    return print(output)
 
 def parse (name):
     html = get_html(URL)
     if html.status_code == 200:
-        return str(get_content(html.text, name))
+        output = get_content(html.text, name)
+        return output
     else:
         print('Error')
-
-parse('Kusama')
