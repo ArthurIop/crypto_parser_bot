@@ -41,7 +41,7 @@ def get_content(name):
 def decorator (coin_dict):
     output = str('Название криптовалюты: ' + coin_dict['name'] + '\n' + 'Монета: ' + coin_dict[
     'symbol'] + '\n' + 'Курс: ' +str(coin_dict['current_price']) + ' $' +'\n'+
-                 'Изменения за последние 24 часа: '+ str(coin_dict['price_change_percentage_24h'])+'%'
+                 'Изменения за последние 24 часа: '+ str(round(coin_dict['price_change_percentage_24h'], 1))+'%'
                  + '\n' + 'Рыночная капитализация: '+ str(coin_dict['market_cap']) +' $' +'\n' )
     return output
 
@@ -49,4 +49,3 @@ def parse(name):
  #проверка
     output = get_content(name)
     return output
-
