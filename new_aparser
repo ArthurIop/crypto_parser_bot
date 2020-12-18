@@ -1,0 +1,52 @@
+import requests
+from PIL import Image
+from urllib.request import urlopen
+
+class coin_item:
+
+    def __init__(self, image, text):
+        self.image = image
+        self.text = text
+
+def get_url(coin_name_id):
+    URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + coin_name_id + '&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+
+    return URL
+
+
+def get_content(name):
+    coin_name_id = name.lower()
+    URL = get_url(coin_name_id)
+    r = requests.get(URL)
+    json_response = r.json()
+    if json_response != []:
+
+
+        coin_dict = json_response[0]
+        text = decorator(coin_dict)
+        url_image = coin_dict['image']
+        r_image = requests.get(url_image)
+        out = open("img.png", "wb")
+        out.write(r_image.content)
+        out.close()
+
+        img = open('img.png', "rb")
+
+
+
+        outp = coin_item(img, text)
+
+        return outp
+    else:
+        return 'Вы ввели неправильное значение, введите /help для подробной информации'
+
+
+def decorator (coin_dict):
+    output = str('Название криптовалюты: ' + coin_dict['name'] + '\n' + 'Монета: ' + coin_dict[
+    'symbol'] + '\n' + 'Курс: ' +str(coin_dict['current_price']) + ' $' +'\n')
+    return output
+
+def parse(name):
+ #gпроверка
+    output = get_content(name)
+    return output
